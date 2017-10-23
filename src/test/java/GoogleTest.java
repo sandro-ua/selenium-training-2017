@@ -1,3 +1,4 @@
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +9,8 @@ public class GoogleTest {
     @Test
     public void googleTest () {
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://google.com");
-
+        ChromeDriverManager.getInstance().setup();
+        ChromeDriver driver = new ChromeDriver();
         driver.findElement(By.xpath("//*[@id=\"lst-ib\"]")).sendKeys("WebDRiver");
         driver.findElement(By.xpath("//input[@name='btnK']")).click();
 
