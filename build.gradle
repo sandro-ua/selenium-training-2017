@@ -16,3 +16,7 @@ dependencies {
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '1.7.2'
 
 }
+
+test {
+    maxParallelForks = 10
+}
