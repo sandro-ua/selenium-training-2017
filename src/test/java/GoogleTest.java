@@ -5,8 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class GoogleTest extends TestBase {
 
     @Test
-    public void googleTest () {
-
+    public void googleTest() {
         ChromeDriverManager.getInstance().setup();
         ChromeDriver driver = new ChromeDriver();
         driver.get("https:\\www.google.com");
