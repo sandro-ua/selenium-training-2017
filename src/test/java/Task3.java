@@ -4,16 +4,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
-public class AdminPageSectionsTest extends TestBase {
+public class Task3 extends TestBase {
 
     @Before
     public void Initialization () {
         ChromeDriverManager.getInstance().setup();
-        AdminLoginPage.SiteLogin (drv, "admin", "admin");
+        drv.get(Constants.ADMIN_PAGE_LINK);
+        drv.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
+        drv.findElement(By.cssSelector("input[name='password']")).sendKeys("admin");
+        drv.findElement(By.cssSelector("button[name=login]")).click();
     }
 
     @Test
-    public void H1TitlePresentOnEachSectionPage() {
+    public void Task3 () {
 
         List<WebElement> sectionItems = drv.findElements(By.cssSelector("li#app- > a > span.name"));
         for (int i=0; i<sectionItems.size(); i++) {
@@ -38,7 +41,7 @@ public class AdminPageSectionsTest extends TestBase {
 
     @Ignore ("additional test, not exactly by the homemade task")
     @Test
-    public void AdminSectionsTitlesEqualsH1Title (){
+    public void Task3b (){
 
         List<WebElement> sectionItems = drv.findElements(By.cssSelector("li#app- > a > span.name"));
         for (int i=0; i<sectionItems.size(); i++) {
