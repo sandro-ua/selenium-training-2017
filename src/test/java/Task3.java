@@ -1,14 +1,20 @@
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.util.List;
 
-public class Task3 extends TestBase {
+public class Task3 {
+
+    public static WebDriver drv = new ChromeDriver();
 
     @Before
     public void Initialization () {
         ChromeDriverManager.getInstance().setup();
+
         drv.get(Constants.ADMIN_PAGE_LINK);
         drv.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
         drv.findElement(By.cssSelector("input[name='password']")).sendKeys("admin");
@@ -24,7 +30,7 @@ public class Task3 extends TestBase {
 
             if (drv.findElements(By.cssSelector("ul.docs")).size() == 0) {
                 String selectedSection = drv.findElement(By.cssSelector("li.selected > a > span:nth-child(2)")).getText().trim();
-                Assert.assertTrue("h1 tag is not present on the page " + selectedSection, drv.findElementsByTagName("h1").size() != 0);
+                Assert.assertTrue("h1 tag is not present on the page " + selectedSection, drv.findElements(By.tagName("h1")).size() != 0);
             } else
 
             {
@@ -33,7 +39,7 @@ public class Task3 extends TestBase {
                 for (int j=0; j<subSectionItems.size(); j++) {
                     drv.findElement(By.cssSelector("ul.docs > li:nth-child(" + String.valueOf(j+1) +")")).click();
                     String selectedSubSection = drv.findElement(By.cssSelector("li.selected > a > span:nth-child(2)")).getText().trim();
-                    Assert.assertTrue("h1 tag is not present on the page " + selectedSubSection, drv.findElementsByTagName("h1").size() != 0);
+                    Assert.assertTrue("h1 tag is not present on the page " + selectedSubSection, drv.findElements(By.tagName("h1")).size() != 0);
                 }
             }
         }
