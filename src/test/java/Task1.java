@@ -1,70 +1,43 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import io.github.bonigarcia.wdm.InternetExplorerDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.openqa.selenium.*;
+import java.util.Arrays;
+import java.util.Collection;
 
-import java.util.concurrent.TimeUnit;
+@RunWith(value = Parameterized.class)
+public class Task1 extends TestBase {
 
+    WebDriver driver = TestBase.getDriver();
 
-public class Task1 {
+    @Parameterized.Parameters
+    public static Collection data () {
+        Object[][] data = {{"Firefox"}, {"Chrome"}, {"InternetExplorer"}};
+        return Arrays.asList(data);
+    }
 
-    private static WebDriver driver;
-    WebDriverWait wait = new WebDriverWait (driver, 10);
+    @Parameterized.Parameter
+    public String browserName;
 
     @Before
     public void start() {
-
+        TestBase.Initialize(browserName);
+        this.driver = TestBase.getDriver();
     }
 
     @Test
-    public void googleTestChrome() {
-        ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+    public void googleTest() {
+        driver.get("https://www.google.com");
         driver.manage().window().maximize();
-        driver.get("https://www.google.com.ua");
-        driver.findElement(By.cssSelector("#lst-ib")).sendKeys("driver");
-        driver.findElement(By.cssSelector("#lst-ib")).sendKeys(Keys.ENTER);
-
-        driver.quit();
-    }
-
-    @Test
-    public void googleTestIE() {
-        InternetExplorerDriverManager.getInstance().arch32().setup();
-        driver = new InternetExplorerDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.google.com.ua");
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        driver.findElement(By.cssSelector("#lst-ib")).sendKeys("driver");
-        driver.findElement(By.cssSelector("#lst-ib")).sendKeys(Keys.ENTER);
-        driver.quit();
-    }
-
-    @Test
-    public void googleTestFirefox() {
-        FirefoxDriverManager.getInstance().setup();
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.google.com.ua");
-        WebElement search = wait.until((WebDriver d) -> d.findElement(By.cssSelector("#lst-ib")));
-        search.sendKeys("driver");
-        search.sendKeys(Keys.ENTER);
-        driver.quit();
+        WebElement element = driver.findElement(By.cssSelector("input[name=q]"));
+        element.sendKeys("driver");
+        element.sendKeys(Keys.ENTER);
     }
 
     @After
     public void finish() {
-        driver.quit();
+        TestBase.Quit();
     }
 }
