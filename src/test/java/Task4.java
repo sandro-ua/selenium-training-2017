@@ -1,12 +1,9 @@
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -68,54 +65,59 @@ public class Task4 {
 
         // Verifications
         //task 4.4a
-        Assert.assertEquals("Product Name is not equal on Main page and Item Page", productNameMainPage, productNameItemPage);
+        Assert.assertEquals("Product Name is not equal on Main page and Item Page" + " [ " + browserName + " ]", productNameMainPage, productNameItemPage);
 
         //task 4.4b
-        Assert.assertEquals("Regular price is not equal on Main page and Item Page", regularPriceValueMainPage, regularPriceItemPage);
-        Assert.assertEquals("Discount price is not equal on Main page and Item Page", discountPriceMainPage, discountPriceItemPage);
+        Assert.assertEquals("Regular price is not equal on Main page and Item Page" + " [ " + browserName + " ]", regularPriceValueMainPage, regularPriceItemPage);
+        Assert.assertEquals("Discount price is not equal on Main page and Item Page" + " [ " + browserName + " ]", discountPriceMainPage, discountPriceItemPage);
 
         //task 4.4.c
         if (browserName == "Chrome" || browserName == "InternetExplorer" ) {
-        Assert.assertEquals("Regular price is not gray on Main page", "rgba(119, 119, 119, 1)", regularPriceColorMainPage);
-        Assert.assertEquals("Regular price is not gray on Item page ", "rgba(102, 102, 102, 1)", regularPriceColorItemPage);
+        Assert.assertEquals("Regular price is not gray on Main page" + " [ " + browserName + " ]", "rgba(119, 119, 119, 1)", regularPriceColorMainPage);
+        Assert.assertEquals("Regular price is not gray on Item page" + " [ " + browserName + " ]", "rgba(102, 102, 102, 1)", regularPriceColorItemPage);
         }
         else {
-            Assert.assertEquals("Regular price is not gray on Main page", "rgb(119, 119, 119)", regularPriceColorMainPage);
-            Assert.assertEquals("Regular price is not gray on Item page ", "rgb(102, 102, 102)", regularPriceColorItemPage);
+            Assert.assertEquals("Regular price is not gray on Main page" + " [ " + browserName + " ]", "rgb(119, 119, 119)", regularPriceColorMainPage);
+            Assert.assertEquals("Regular price is not gray on Item page" + " [ " + browserName + " ]", "rgb(102, 102, 102)", regularPriceColorItemPage);
         }
 
         if (browserName == "InternetExplorer") {
-            Assert.assertEquals("Regular price is not strike on Main page ", "", regularPriceDecorationMainPage);
-            Assert.assertEquals("Regular price is not strike on Item page ", "", regularPriceDecorationItemPage);
+            Assert.assertEquals("Regular price is not strike on Main page" + " [ " + browserName + " ]", "", regularPriceDecorationMainPage);
+            Assert.assertEquals("Regular price is not strike on Item page" + " [ " + browserName + " ]", "", regularPriceDecorationItemPage);
         }
             else {
-            Assert.assertEquals("Regular price is not strike on Main page ", "line-through", regularPriceDecorationMainPage);
-            Assert.assertEquals("Regular price is not strike on Item page ", "line-through", regularPriceDecorationItemPage);
+            Assert.assertEquals("Regular price is not strike on Main page" + " [ " + browserName + " ]", "line-through", regularPriceDecorationMainPage);
+            Assert.assertEquals("Regular price is not strike on Item page" + " [ " + browserName + " ]", "line-through", regularPriceDecorationItemPage);
         }
 
         // task 4.4.d
         if (browserName == "Chrome" || browserName == "InternetExplorer" ) {
-            Assert.assertEquals("Discount price is not red on Main page", "rgba(204, 0, 0, 1)", discountPriceColorMainPage);
-            Assert.assertEquals("Discount price is not red on Item page ", "rgba(204, 0, 0, 1)", discountPriceColorItemPage);
+            Assert.assertEquals("Discount price is not red on Main page" + " [ " + browserName + " ]", "rgba(204, 0, 0, 1)", discountPriceColorMainPage);
+            Assert.assertEquals("Discount price is not red on Item page" + " [ " + browserName + " ]", "rgba(204, 0, 0, 1)", discountPriceColorItemPage);
         }
         else {
-            Assert.assertEquals("Discount price is not red on Main page", "rgb(119, 119, 119)", discountPriceColorMainPage);
-            Assert.assertEquals("Discount price is not red on Item page ", "rgb(102, 102, 102)", discountPriceColorItemPage);
+            Assert.assertEquals("Discount price is not red on Main page" + " [ " + browserName + " ]", "rgb(204, 0, 0)", discountPriceColorMainPage);
+            Assert.assertEquals("Discount price is not red on Item page" + " [ " + browserName + " ]", "rgb(204, 0, 0)", discountPriceColorItemPage);
         }
 
-        if (browserName == "InternetExplorer") {
-            Assert.assertEquals("Discount price is not bold on Main page ", "", discountPriceDecorationMainPage);
-            Assert.assertEquals("Discount price is not bold on Item page ", "", discountPriceDecorationItemPage);
-        }
-        else {
-            Assert.assertEquals("Discount price is not bold on Main page ", "bold", discountPriceDecorationMainPage);
-            Assert.assertEquals("Discount price is not bold on Item page ", "bold", discountPriceDecorationItemPage);
+        switch (browserName) {
+            case "InternetExplorer":
+                Assert.assertEquals("Discount price is not bold on Main page" + " [ " + browserName + " ]", "900", discountPriceDecorationMainPage);
+                Assert.assertEquals("Discount price is not bold on Item page" + " [ " + browserName + " ]", "700", discountPriceDecorationItemPage);
+                break;
+            case "Chrome":
+                Assert.assertEquals("Discount price is not bold on Main page" + " [ " + browserName + " ]", "bold", discountPriceDecorationMainPage);
+                Assert.assertEquals("Discount price is not bold on Item page" + " [ " + browserName + " ]", "bold", discountPriceDecorationItemPage);
+                break;
+            case "Firefox":
+                Assert.assertEquals("Discount price is not bold on Main page" + " [ " + browserName + " ]", "900", discountPriceDecorationMainPage);
+                Assert.assertEquals("Discount price is not bold on Item page" + " [ " + browserName + " ]", "700", discountPriceDecorationItemPage);
+                break;
         }
     }
 
-    @AfterClass
-    public static void TearDown() {
+    @After
+    public void TearDown() {
         TestBase.Quit();
     }
-
 }
