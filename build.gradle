@@ -14,7 +14,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
     compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '1.7.2'
-
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
 }
 
 test {
