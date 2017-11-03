@@ -43,9 +43,7 @@ public class Task5 {
         drv.findElement(By.cssSelector("input[name='name[en]']")).sendKeys("product_" + uniqueID);
         drv.findElement(By.cssSelector("input[name='code']")).sendKeys("01");
         drv.findElement(By.cssSelector("input[name='product_groups[]'][value='1-3']")).click();
-
         typeIntoCustomInput (drv.findElement(By.cssSelector("input[name='quantity']")), "3");
-
         ((JavascriptExecutor) drv).executeScript("document.getElementsByName('date_valid_from')[0].setAttribute('value','2017-11-03')");
         ((JavascriptExecutor) drv).executeScript("document.getElementsByName('date_valid_to')[0].setAttribute('value','2018-11-03')");
 
@@ -74,7 +72,8 @@ public class Task5 {
 
         //Make sure that new product appeared in catalog
         drv.findElement(By.xpath("//span[contains(text(), 'Catalog')]"));
-        Assert.assertTrue("Product wasn't created", drv.findElements(By.xpath(String.format("//a[contains(text(), '%s')]", uniqueID))).size() > 0);
+        boolean isProductPresentInCatalog = drv.findElements(By.xpath(String.format("//a[contains(text(), '%s')]", uniqueID))).size() > 0;
+        Assert.assertTrue("Product wasn't created", isProductPresentInCatalog);
     }
 
     @After
