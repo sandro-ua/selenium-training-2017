@@ -76,10 +76,6 @@ public class Task5 {
         Assert.assertTrue("Product wasn't created", isProductPresentInCatalog);
     }
 
-    @After
-    public void finish() {
-        drv.quit();
-    }
 
     public void typeIntoCustomInput (WebElement el, String value) {
         el.clear();
