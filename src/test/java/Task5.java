@@ -70,10 +70,15 @@ public class Task5 {
         // Save
         drv.findElement(By.cssSelector("button[name='save']")).click();
 
-        //Make sure that new product appeared in catalog
+        // Make sure that new product appeared in catalog
         drv.findElement(By.xpath("//span[contains(text(), 'Catalog')]"));
         boolean isProductPresentInCatalog = drv.findElements(By.xpath(String.format("//a[contains(text(), '%s')]", uniqueID))).size() > 0;
         Assert.assertTrue("Product wasn't created", isProductPresentInCatalog);
+    }
+
+    @After
+    public void finish() {
+        drv.quit();
     }
 
 

@@ -1,12 +1,12 @@
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,8 +18,6 @@ public class Task6 {
     @Before
     public void Initialization() {
         ChromeDriverManager.getInstance().setup();
-
-
     }
 
     @Test
@@ -28,7 +26,7 @@ public class Task6 {
         boolean cartIsNotEmpty;
         WebDriverWait wait = new WebDriverWait(drv, 10);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             drv.get(Constants.MAIN_PAGE);
             drv.findElement(By.cssSelector("ul[class='listing-wrapper products'] div.price-wrapper")).click();
 
@@ -44,13 +42,7 @@ public class Task6 {
 
             wait.until(ExpectedConditions.textToBe(By.cssSelector("span.quantity"), String.valueOf(currentQuantity + 1)));
         }
-        int itemsInCart = Integer.valueOf(drv.findElement(By.cssSelector("span.quantity")).getText());
         drv.findElement(By.cssSelector("div#cart a")).click();
-
-        WebElement quantityInput = drv.findElement(By.cssSelector("input[name='quantity']"));
-        WebElement updateQuantity = drv.findElement(By.cssSelector("button[name='update_cart_item']"));
-        WebElement quantityTable = drv.findElement(By.xpath("//*[@id=\"order_confirmation-wrapper\"]/table/tbody/tr[2]/td[1]"));
-
 
         do {
 
@@ -63,15 +55,11 @@ public class Task6 {
         } while (cartIsNotEmpty == true);
 
 
+        boolean cartIsEmptyMessageDisplayed = drv.findElements(By.xpath("//em[text() = 'There are no items in your cart.']")).size() > 0;
+        Assert.assertTrue("Cart is not empty", cartIsEmptyMessageDisplayed);
     }
     @After
     public void finish() {
         drv.quit();
     }
-
-    public void typeIntoCustomInput (WebElement el, String value) {
-        el.clear();
-        el.sendKeys(value);
-    }
-
 }
