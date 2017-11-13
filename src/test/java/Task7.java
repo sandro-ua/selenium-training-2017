@@ -33,6 +33,7 @@ public class Task7 {
         // Open Countries (http://localhost/litecart/admin/?app=countries&doc=countries )
         drv.findElement(By.xpath("//span[contains(text(), 'Countries')]")).click();
         drv.findElement(By.xpath("//a[@class='button'][contains(@href, 'edit_country')]")).click();
+
         // Open on Edit any country or click “add new country”
         List<WebElement> newWindowElements = drv.findElements(By.cssSelector("i[class='fa fa-external-link']"));
         Set<String> parentWindowHandle = drv.getWindowHandles();
