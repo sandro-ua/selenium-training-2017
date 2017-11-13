@@ -76,7 +76,6 @@ public class Task8 {
 
                     // Failing test fot task 8
                     drv.findElement(By.cssSelector("li.selected > h3 >")).getText().trim();
-
                 }
             }
         }
