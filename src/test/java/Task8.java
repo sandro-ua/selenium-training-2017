@@ -30,14 +30,13 @@ public class Task8 {
             System.out.println("Exception: " + throwable);
 
             try {
-                File tempFile = ((TakesScreenshot)drv).getScreenshotAs(OutputType.FILE);
+                File tempFile = (drv).getScreenshotAs(OutputType.FILE);
                 Files.copy(tempFile, new File ("screen.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
     @Before
     public void Initialization () {
@@ -49,6 +48,7 @@ public class Task8 {
         System.out.println("LOGS: " + drv.manage().logs().getAvailableLogTypes());
 
         drv.get(Constants.ADMIN_PAGE_LINK);
+        //drv.get("http://toolsqa.com/selenium-tutorial/");
         drv.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
         drv.findElement(By.cssSelector("input[name='password']")).sendKeys("admin");
         drv.findElement(By.cssSelector("button[name=login]")).click();
@@ -71,7 +71,8 @@ public class Task8 {
 
                 for (int j=0; j<subSectionItems.size(); j++) {
                     drv.findElement(By.cssSelector("ul.docs > li:nth-child(" + String.valueOf(j+1) +")")).click();
-                    String selectedSubSection = drv.findElement(By.cssSelector("li.selected > a > span:nth-child(2)")).getText().trim();
+
+                    //String selectedSubSection = drv.findElement(By.cssSelector("li.selected > a > span:nth-child(2)")).getText().trim();
                     //Assert.assertTrue("h1 tag is not present on the page " + selectedSubSection, drv.findElements(By.tagName("h1")).size() != 0);
 
                     // Failing test fot task 8
@@ -85,7 +86,7 @@ public class Task8 {
     public void TearDown() {
 
         for (LogEntry l : drv.manage().logs().get("browser").getAll()) {
-            System.out.println("BROWSER LOGS: " + l);
+            System.out.println(">>> BROWSER LOGS: " + l);
         }
         drv.quit();
     }
