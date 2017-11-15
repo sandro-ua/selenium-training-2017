@@ -1,23 +1,11 @@
 package Task9;
 
-
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import Task9.TestBase.TestBase;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
-
-public class Task9 {
-
-    WebDriver drv;
-    TestBase testBase = new TestBase(drv);
-
-    @Before
-    public void Initialization() {
-        ChromeDriverManager.getInstance().setup();
-    }
+public class Task9 extends TestBase {
 
     @Test
     public void Task9() {
@@ -25,21 +13,23 @@ public class Task9 {
         boolean cartIsNotEmpty;
 
         for (int i = 0; i < 3; i++) {
-            testBase.openApp();
-            testBase.mainPage.openRandomProduct();
-            testBase.productPage.addToCart("Medium");
+            app.openApp();
+
+            app.openRandomProduct();
+            app.addToCart("Medium");
         }
-        testBase.topPageBlock.openCart();
+        app.openCart();
 
         do {
-            cartIsNotEmpty = testBase.cartPage.removeProductFromCart();
+            app.removeProductFromCart();
+            cartIsNotEmpty = app.isCartIsEmptyMessageDisplayed();
         } while (cartIsNotEmpty == true);
 
-        Assert.assertTrue("Cart is not empty", testBase.cartPage.cartIsEmptyMessageDisplayed());
+        Assert.assertTrue("Cart is not empty", app.isCartIsEmptyMessageDisplayed());
     }
 
     @After
     public void finish() {
-        testBase.closeApp();
+        //app.closeApp();
     }
 }

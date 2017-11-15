@@ -1,23 +1,19 @@
-package Task9;
+package Task9.Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class CartPage {
+public class CartPage extends Page {
 
-    WebDriver drv;
-
-    public CartPage (WebDriver drv) {
-        this.drv = drv;
+    public CartPage (WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
     }
-
-    WebDriverWait wait = new WebDriverWait(drv, 10);
 
     @FindBy(css = "ul.shortcuts > li")
     private List<WebElement> productShortcuts;
@@ -41,15 +37,17 @@ public class CartPage {
         return productShortcuts.size() > 0;
     }
 
-    public void clickFirstProductShortcut () {
+    public CartPage clickFirstProductShortcut () {
         productShortcut.click();
+        return this;
     }
 
-    public void removeCartItem () {
+    public CartPage removeCartItem () {
         removeCartItemButton.click();
+        return this;
     }
 
-    public boolean cartIsEmptyMessageDisplayed () {
+    public boolean isCartIsEmptyMessageDisplayed () {
         return cartIsEmptyMessage.size() > 0;
     }
 
@@ -57,13 +55,13 @@ public class CartPage {
         return cartTables.size() > 0;
     }
 
-    public boolean removeProductFromCart () {
+    public CartPage removeProductFromCart () {
 
             if (isProductShortcutAvailable())
                 clickFirstProductShortcut();
             removeCartItem();
             wait.until(ExpectedConditions.stalenessOf(cartTable));
-            return isCartTableDisplayed();
+            return this;
     }
 
 }

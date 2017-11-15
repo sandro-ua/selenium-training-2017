@@ -1,4 +1,6 @@
-package Task9;
+package Task9.Data;
+
+import Task9.Task9;
 
 public class Constants {
     public final static String ADMIN_PAGE_LINK = "http://localhost/litecart/admin/login.php";

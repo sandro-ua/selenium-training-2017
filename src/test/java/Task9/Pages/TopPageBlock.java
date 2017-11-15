@@ -1,15 +1,15 @@
-package Task9;
+package Task9.Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class TopPageBlock {
+public class TopPageBlock extends Page {
 
-    WebDriver drv;
-
-    public TopPageBlock (WebDriver drv) {
-        this.drv = drv;
+    public TopPageBlock (WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy (css = "span.quantity")
@@ -22,9 +22,8 @@ public class TopPageBlock {
         return Integer.valueOf(quantity.getText());
     }
 
-    public void openCart () {
+    public CartPage openCart () {
         cartLink.click();
+        return new CartPage(driver);
     }
-
-
 }

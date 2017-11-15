@@ -1,22 +1,24 @@
-package Task9;
+package Task9.Pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
-public class MainPage {
-    WebDriver drv;
+public class MainPage extends Page {
 
-    public MainPage (WebDriver drv) {
-        this.drv = drv;
+    public MainPage (WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy (how = How.CSS, using = "ul[class='listing-wrapper products'] div.price-wrapper")
     private WebElement addToCartButton;
 
-    public void openRandomProduct () {
+    public ProductPage openRandomProduct () {
         addToCartButton.click();
+        return new ProductPage(driver);
     }
 
 }
