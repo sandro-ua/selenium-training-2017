@@ -11,6 +11,7 @@ public class TopPageBlock extends Page {
 
     @FindBy(css = "span.quantity")
     private WebElement quantity;
+
     @FindBy(css = "div#cart a")
     private WebElement cartLink;
 

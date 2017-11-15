@@ -12,14 +12,19 @@ public class CartPage extends Page {
 
     @FindBy(css = "ul.shortcuts > li")
     private List<WebElement> productShortcuts;
+
     @FindBy(css = "ul.shortcuts > li")
     private WebElement productShortcut;
+
     @FindBy(css = "table[class='dataTable rounded-corners']")
     private WebElement cartTable;
+
     @FindBy(css = "table[class='dataTable rounded-corners']")
     private List<WebElement> cartTables;
+
     @FindBy(css = "button[name='remove_cart_item']")
     private WebElement removeCartItemButton;
+
     @FindBy(xpath = "//em[text() = 'There are no items in your cart.']")
     private List<WebElement> cartIsEmptyMessage;
 

@@ -12,8 +12,10 @@ public class ProductPage extends Page {
 
     @FindBy(how = How.CSS, using = "select[name='options[Size]']")
     private List<WebElement> productSizeDropdowns;
+
     @FindBy(how = How.CSS, using = "select[name='options[Size]']")
     private WebElement productSizeDropdown;
+
     @FindBy(css = "button[name='add_cart_product']")
     private WebElement addToCartButton;
 

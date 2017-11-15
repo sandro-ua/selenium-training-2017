@@ -20,5 +20,4 @@ public class MainPage extends Page {
         addToCartButton.click();
         return new ProductPage(drv);
     }
-
 }
