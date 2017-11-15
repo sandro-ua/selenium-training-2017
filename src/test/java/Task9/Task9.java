@@ -10,7 +10,7 @@ public class Task9 extends TestBase {
     @Test
     public void Task9() {
         for (int i = 0; i < 3; i++) {
-            app.addToCartRandromProduct();
+            app.addToCartRandomProduct();
         }
         app.openCart();
         app.removeAllProductsFromCart();

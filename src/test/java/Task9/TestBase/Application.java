@@ -3,7 +3,6 @@ package Task9.TestBase;
 import Task9.Data.Constants;
 import Task9.Pages.*;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -66,7 +65,7 @@ public class Application extends TestBase{
         return cartPage.isCartTableDisplayed();
     }
 
-    public void addToCartRandromProduct() {
+    public void addToCartRandomProduct() {
         openMainPage();
         openRandomProduct();
         addToCart("Medium");
