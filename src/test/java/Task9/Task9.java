@@ -9,27 +9,17 @@ public class Task9 extends TestBase {
 
     @Test
     public void Task9() {
-
-        boolean cartIsNotEmpty;
-
         for (int i = 0; i < 3; i++) {
-            app.openApp();
-
-            app.openRandomProduct();
-            app.addToCart("Medium");
+            app.addToCartRandromProduct();
         }
         app.openCart();
-
-        do {
-            app.removeProductFromCart();
-            cartIsNotEmpty = app.isCartIsEmptyMessageDisplayed();
-        } while (cartIsNotEmpty == true);
+        app.removeAllProductsFromCart();
 
         Assert.assertTrue("Cart is not empty", app.isCartIsEmptyMessageDisplayed());
     }
 
     @After
     public void finish() {
-        //app.closeApp();
+        app.closeApp();
     }
 }

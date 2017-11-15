@@ -6,8 +6,6 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Application extends TestBase{
 
@@ -18,7 +16,6 @@ public class Application extends TestBase{
     private ProductPage productPage;
     private TopPageBlock topPageBlock;
 
-    WebDriverWait wait = new WebDriverWait(drv, 10);
 
     public Application() {
         ChromeDriverManager.getInstance().setup();
@@ -30,13 +27,13 @@ public class Application extends TestBase{
         topPageBlock = new TopPageBlock(drv);
     }
 
-    public void openApp() {
+    public void openMainPage() {
         drv.get(Constants.MAIN_PAGE);
     }
 
-   /* public  void closeApp() {
+    public void closeApp() {
         drv.quit();
-    }*/
+    }
 
     public ProductPage openRandomProduct () {
         return mainPage.openRandomProduct();
@@ -46,7 +43,7 @@ public class Application extends TestBase{
         productPage.selectSize(size);
         Integer currentQuantity = topPageBlock.getCurrentQuantity();
         productPage.clickAddToCart();
-        wait.until(ExpectedConditions.textToBe(By.cssSelector("span.quantity"), String.valueOf(currentQuantity + 1)));
+        topPageBlock.waitTillQuantityChanges(currentQuantity);
     }
 
     public CartPage openCart () {
@@ -59,5 +56,27 @@ public class Application extends TestBase{
 
     public boolean isCartIsEmptyMessageDisplayed() {
         return cartPage.isCartIsEmptyMessageDisplayed();
+    }
+
+    public boolean isProductShortCutAvailable() {
+        return cartPage.isProductShortcutAvailable();
+    }
+
+    public boolean isCartTableDisplayed() {
+        return cartPage.isCartTableDisplayed();
+    }
+
+    public void addToCartRandromProduct() {
+        openMainPage();
+        openRandomProduct();
+        addToCart("Medium");
+    }
+
+    public void removeAllProductsFromCart() {
+        boolean cartIsNotEmpty;
+        do {
+            removeProductFromCart();
+            cartIsNotEmpty = isCartTableDisplayed();
+        } while (cartIsNotEmpty == true);
     }
 }

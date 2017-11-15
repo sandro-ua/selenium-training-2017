@@ -5,12 +5,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Page {
 
-    protected WebDriver driver;
+    protected WebDriver drv;
     protected WebDriverWait wait;
 
-    public Page(WebDriver driver) {
-        this.driver = driver;
-        wait = new WebDriverWait(driver, 10);
+    public Page(WebDriver drv) {
+        this.drv = drv;
+        wait = new WebDriverWait(drv, 10);
     }
 }
 

@@ -8,9 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MainPage extends Page {
 
-    public MainPage (WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
+    public MainPage (WebDriver drv) {
+        super(drv);
+        PageFactory.initElements(drv, this);
     }
 
     @FindBy (how = How.CSS, using = "ul[class='listing-wrapper products'] div.price-wrapper")
@@ -18,7 +18,7 @@ public class MainPage extends Page {
 
     public ProductPage openRandomProduct () {
         addToCartButton.click();
-        return new ProductPage(driver);
+        return new ProductPage(drv);
     }
 
 }
