@@ -11,8 +11,8 @@ public class Task9 extends TestBase {
     public void Task9() {
         for (int i = 0; i < 3; i++) {
             app.addToCartRandomProduct();
+            Assert.assertTrue("Product wasn't added to cart", app.isProductAddedToCart(i));
         }
-        app.openCart();
         app.removeAllProductsFromCart();
 
         Assert.assertTrue("Cart is not empty", app.isCartIsEmptyMessageDisplayed());
