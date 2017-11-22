@@ -38,7 +38,7 @@ public class Task7 {
 
         // Open on Edit any country or click “add new country”
         List<WebElement> newWindowElements = drv.findElements(By.cssSelector("i[class='fa fa-external-link']"));
-        Set<String> parentWindowHandle = drv.getWindowHandles();
+        String parentWindowHandle = drv.getWindowHandle();
 
         for (int i = 0; i < newWindowElements.size(); i++) {
 
@@ -58,7 +58,7 @@ public class Task7 {
 
             drv.switchTo().window(newW);
             drv.close();
-            drv.switchTo().window(parentWindowHandle.toArray()[0].toString());
+            drv.switchTo().window(parentWindowHandle.toString());
         }
     }
 
